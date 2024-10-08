@@ -131,7 +131,6 @@ def contrato_delete(request, pk):
         return redirect('contrato_list')
     return render(request, 'core/contrato_confirm_delete.html', {'contrato': contrato})
 
-
 def pagamento_list(request):
     pagamentos = Pagamento.objects.all()
     return render(request, 'core/pagamento_list.html', {'pagamentos': pagamentos})

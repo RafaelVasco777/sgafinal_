@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('core.urls')),  # Inclui as URLs do app 'core'
 ]
 
 # Adicione esta linha para servir arquivos de mídia durante o desenvolvimento

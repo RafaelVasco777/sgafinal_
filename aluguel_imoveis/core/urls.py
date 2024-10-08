@@ -1,4 +1,3 @@
-# core/urls.py
 from django.urls import path
 from .views import (
     imovel_list, imovel_create, imovel_update, imovel_delete,
