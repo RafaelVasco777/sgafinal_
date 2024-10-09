@@ -5,9 +5,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),  # Inclui as URLs do app 'core'
+    path('', include('core.urls')), 
 ]
 
-# Adicione esta linha para servir arquivos de mídia durante o desenvolvimento
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
