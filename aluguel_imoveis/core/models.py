@@ -6,7 +6,7 @@ class Proprietario(models.Model):
     nome = models.CharField(max_length=100)
     cpf = models.CharField(
         max_length=14,
-        validators=[RegexValidator(regex=r'\d{3}\.\d{3}\.\d{3}-\d{2}', message=_('Formato do CPF deve ser XXX.XXX.XXX-XX'))],
+        validators=[RegexValidator(regex=r'\d{9}-\d{2}', message=_('Formato do CPF deve ser XXX.XXX.XXX-XX'))],
         unique=True
     )
     data_nascimento = models.DateField()
@@ -24,7 +24,7 @@ class Cliente(models.Model):
     nome = models.CharField(max_length=100)
     cpf = models.CharField(
         max_length=14,
-        validators=[RegexValidator(regex=r'\d{3}\.\d{3}\.\d{3}-\d{2}', message=_('Formato do CPF deve ser XXX.XXX.XXX-XX'))],
+        validators=[RegexValidator(regex=r'\d{9}-\d{2}', message=_('Formato do CPF deve ser XXX.XXX.XXX-XX'))],
         unique=True
     )
     data_nascimento = models.DateField()

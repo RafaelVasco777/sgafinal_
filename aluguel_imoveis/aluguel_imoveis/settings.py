@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-kgb=_ec*!esrp4qmcwces6$!n-$jm+umsn48z&1(531qyurcv)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -73,10 +73,18 @@ WSGI_APPLICATION = 'aluguel_imoveis.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aluguel',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+
     }
+
+
 }
 
 # Password validation
