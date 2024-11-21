@@ -1,7 +1,8 @@
-# core/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento
-from .forms import ImovelForm, ProprietarioForm, ClienteForm, ContratoForm, PagamentoForm
+from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento, Corretor, Imobiliaria
+from .forms import ImovelForm, ProprietarioForm, ClienteForm, ContratoForm, PagamentoForm, CorretorForm, ImobiliariaForm
+from django.shortcuts import render
+
 
 def imovel_list(request):
     imoveis = Imovel.objects.all()
@@ -162,3 +163,70 @@ def pagamento_delete(request, pk):
         pagamento.delete()
         return redirect('pagamento_list')
     return render(request, 'core/pagamento_confirm_delete.html', {'pagamento': pagamento})
+
+def corretor_list(request):
+    corretores = Corretor.objects.all()
+    return render(request, 'core/corretor_list.html', {'corretores': corretores})
+
+def corretor_create(request):
+    if request.method == "POST":
+        form = CorretorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('corretor_list')
+    else:
+        form = CorretorForm()
+    return render(request, 'core/corretor_form.html', {'form': form})
+
+def corretor_update(request, pk):
+    corretor = get_object_or_404(Corretor, pk=pk)
+    if request.method == "POST":
+        form = CorretorForm(request.POST, instance=corretor)
+        if form.is_valid():
+            form.save()
+            return redirect('corretor_list')
+    else:
+        form = CorretorForm(instance=corretor)
+    return render(request, 'core/corretor_form.html', {'form': form})
+
+def corretor_delete(request, pk):
+    corretor = get_object_or_404(Corretor, pk=pk)
+    if request.method == "POST":
+        corretor.delete()
+        return redirect('corretor_list')
+    return render(request, 'core/corretor_confirm_delete.html', {'corretor': corretor})
+
+def imobiliaria_list(request):
+    imobiliarias = Imobiliaria.objects.all()
+    return render(request, 'core/imobiliaria_list.html', {'imobiliarias': imobiliarias})
+
+def imobiliaria_create(request):
+    if request.method == "POST":
+        form = ImobiliariaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('imobiliaria_list')
+    else:
+        form = ImobiliariaForm()
+    return render(request, 'core/imobiliaria_form.html', {'form': form})
+
+def imobiliaria_update(request, pk):
+    imobiliaria = get_object_or_404(Imobiliaria, pk=pk)
+    if request.method == "POST":
+        form = ImobiliariaForm(request.POST, instance=imobiliaria)
+        if form.is_valid():
+            form.save()
+            return redirect('imobiliaria_list')
+    else:
+        form = ImobiliariaForm(instance=imobiliaria)
+    return render(request, 'core/imobiliaria_form.html', {'form': form})
+
+def imobiliaria_delete(request, pk):
+    imobiliaria = get_object_or_404(Imobiliaria, pk=pk)
+    if request.method == "POST":
+        imobiliaria.delete()
+        return redirect('imobiliaria_list')
+    return render(request, 'core/imobiliaria_confirm_delete.html', {'imobiliaria': imobiliaria})
+
+def index(request):
+    return render(request, 'core/index.html')

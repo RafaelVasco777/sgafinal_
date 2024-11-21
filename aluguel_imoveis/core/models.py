@@ -2,6 +2,44 @@ from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator
 from django.utils.translation import gettext_lazy as _
 
+class Imobiliaria(models.Model):
+    nome = models.CharField(max_length=100)
+    cnpj = models.CharField(
+        max_length=18,
+        validators=[RegexValidator(regex=r'\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}', message=_('Formato do CNPJ deve ser XX.XXX.XXX/XXXX-XX'))],
+        unique=True
+    )
+    telefone = models.CharField(
+        max_length=15,
+        validators=[RegexValidator(regex=r'\(\d{2}\) \d{4,5}-\d{4}', message=_('Formato do telefone deve ser (XX) XXXXX-XXXX'))]
+    )
+    email = models.EmailField(unique=True)
+    site = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
+
+class Corretor(models.Model):
+    nome = models.CharField(max_length=100)
+    cpf = models.CharField(
+        max_length=14,
+        validators=[RegexValidator(regex=r'\d{9}-\d{2}', message=_('Formato do CPF deve ser XXX.XXX.XXX-XX'))],
+        unique=True
+    )
+    data_nascimento = models.DateField()
+    telefone = models.CharField(
+        max_length=15,
+        validators=[RegexValidator(regex=r'\(\d{2}\) \d{4,5}-\d{4}', message=_('Formato do telefone deve ser (XX) XXXXX-XXXX'))]
+    )
+    email = models.EmailField(unique=True)
+    creci = models.CharField(max_length=20, unique=True)
+    imoveis_gerenciados = models.ManyToManyField('Imovel', related_name='corretores')
+    comissao = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    imobiliaria = models.ForeignKey(Imobiliaria, on_delete=models.CASCADE, related_name='corretores')
+
+    def __str__(self):
+        return self.nome
+
 class Proprietario(models.Model):
     nome = models.CharField(max_length=100)
     cpf = models.CharField(
@@ -15,10 +53,10 @@ class Proprietario(models.Model):
         validators=[RegexValidator(regex=r'\(\d{2}\) \d{4,5}-\d{4}', message=_('Formato do telefone deve ser (XX) XXXXX-XXXX'))]
     )
     email = models.EmailField(unique=True)
+    imobiliaria = models.ForeignKey(Imobiliaria, on_delete=models.CASCADE, related_name='proprietarios', null=True, blank=True)
 
     def __str__(self):
         return self.nome
-
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)
@@ -36,7 +74,6 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nome
-
 
 class Imovel(models.Model):
     endereco = models.CharField(max_length=200)
@@ -58,7 +95,6 @@ class Imovel(models.Model):
     def __str__(self):
         return f'{self.tipo} em {self.endereco}'
 
-
 class Contrato(models.Model):
     class TipoContrato(models.TextChoices):
         ALUGUEL = 'aluguel', _('Aluguel')
@@ -79,7 +115,6 @@ class Contrato(models.Model):
 
     def __str__(self):
         return f'Contrato de {self.cliente} para {self.imovel}'
-
 
 class Pagamento(models.Model):
     class MetodoPagamento(models.TextChoices):

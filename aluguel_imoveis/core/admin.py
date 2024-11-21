@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento
+from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento, Corretor, Imobiliaria
 
 class ContratoInline(admin.TabularInline):
     model = Contrato
@@ -36,3 +36,14 @@ class PagamentoAdmin(admin.ModelAdmin):
     list_display = ('id', 'contrato', 'data_pagamento', 'valor', 'metodo_pagamento', 'data_vencimento')
     search_fields = ('contrato__id', 'metodo_pagamento')
     list_filter = ('data_pagamento', 'metodo_pagamento')
+
+@admin.register(Corretor)
+class CorretorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nome', 'cpf', 'telefone', 'email', 'creci', 'imobiliaria')
+    search_fields = ('nome', 'cpf', 'creci')
+    list_filter = ('imobiliaria',)
+
+@admin.register(Imobiliaria)
+class ImobiliariaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nome', 'cnpj', 'telefone', 'email', 'site')
+    search_fields = ('nome', 'cnpj')

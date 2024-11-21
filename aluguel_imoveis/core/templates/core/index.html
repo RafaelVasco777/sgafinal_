@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial - Aluguel de Imóveis{% endblock %}
+
+{% block content %}
+<section class="intro">
+    <div class="container">
+        <h1>Quem Somos</h1>
+        <p>Somos uma imobiliária comprometida em oferecer as melhores soluções de aluguel e venda de imóveis. Trabalhamos com uma grande variedade de apartamentos, casas e imóveis comerciais, sempre buscando atender às necessidades e expectativas dos nossos clientes.</p>
+    </div>
+</section>
+
+<section class="cta-buttons">
+    <div class="container text-center">
+        <button class="btn btn-primary m-2" onclick="window.location.href='/imoveis/'">Ver Imóveis Disponíveis</button>
+        <button class="btn btn-secondary m-2" onclick="window.location.href='/corretores/'">Conheça Nossos Corretores</button>
+        <button class="btn btn-info m-2" onclick="window.location.href='/sobre-nos/'">Saiba Mais Sobre Nós</button>
+    </div>
+</section>
+{% endblock %}

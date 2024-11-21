@@ -1,5 +1,5 @@
 from django import forms
-from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento
+from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento, Corretor, Imobiliaria
 
 class ImovelForm(forms.ModelForm):
     class Meta:
@@ -45,4 +45,22 @@ class PagamentoForm(forms.ModelForm):
         widgets = {
             'data_pagamento': forms.DateInput(attrs={'type': 'date'}),
             'data_vencimento': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+class CorretorForm(forms.ModelForm):
+    class Meta:
+        model = Corretor
+        fields = '__all__'
+        widgets = {
+            'cpf': forms.TextInput(attrs={'placeholder': 'XXX.XXX.XXX-XX'}),
+            'telefone': forms.TextInput(attrs={'placeholder': '(XX) XXXXX-XXXX'}),
+        }
+
+class ImobiliariaForm(forms.ModelForm):
+    class Meta:
+        model = Imobiliaria
+        fields = '__all__'
+        widgets = {
+            'cnpj': forms.TextInput(attrs={'placeholder': 'XX.XXX.XXX/XXXX-XX'}),
+            'telefone': forms.TextInput(attrs={'placeholder': '(XX) XXXXX-XXXX'}),
         }
