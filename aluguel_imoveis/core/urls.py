@@ -12,43 +12,36 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # Imóvel URLs
     path('imovel/', imovel_list, name='imovel_list'),
     path('imovel/create/', imovel_create, name='imovel_create'),
     path('imovel/<int:pk>/update/', imovel_update, name='imovel_update'),
     path('imovel/<int:pk>/delete/', imovel_delete, name='imovel_delete'),
 
-    # Proprietário URLs
     path('proprietario/', proprietario_list, name='proprietario_list'),
     path('proprietario/create/', proprietario_create, name='proprietario_create'),
     path('proprietario/<int:pk>/update/', proprietario_update, name='proprietario_update'),
     path('proprietario/<int:pk>/delete/', proprietario_delete, name='proprietario_delete'),
 
-    # Cliente URLs
     path('cliente/', cliente_list, name='cliente_list'),
     path('cliente/create/', cliente_create, name='cliente_create'),
     path('cliente/<int:pk>/update/', cliente_update, name='cliente_update'),
     path('cliente/<int:pk>/delete/', cliente_delete, name='cliente_delete'),
 
-    # Contrato URLs
     path('contrato/', contrato_list, name='contrato_list'),
     path('contrato/create/', contrato_create, name='contrato_create'),
     path('contrato/<int:pk>/update/', contrato_update, name='contrato_update'),
     path('contrato/<int:pk>/delete/', contrato_delete, name='contrato_delete'),
 
-    # Pagamento URLs
     path('pagamento/', pagamento_list, name='pagamento_list'),
     path('pagamento/create/', pagamento_create, name='pagamento_create'),
     path('pagamento/<int:pk>/update/', pagamento_update, name='pagamento_update'),
     path('pagamento/<int:pk>/delete/', pagamento_delete, name='pagamento_delete'),
 
-    # Corretor URLs
     path('corretor/', corretor_list, name='corretor_list'),
     path('corretor/create/', corretor_create, name='corretor_create'),
     path('corretor/<int:pk>/update/', corretor_update, name='corretor_update'),
     path('corretor/<int:pk>/delete/', corretor_delete, name='corretor_delete'),
 
-    # Imobiliária URLs
     path('imobiliaria/', imobiliaria_list, name='imobiliaria_list'),
     path('imobiliaria/create/', imobiliaria_create, name='imobiliaria_create'),
     path('imobiliaria/<int:pk>/update/', imobiliaria_update, name='imobiliaria_update'),
@@ -57,5 +50,4 @@ urlpatterns = [
 
 urlpatterns = [
     path('', views.index, name='index'),
-    # Outras URLs...
 ]
