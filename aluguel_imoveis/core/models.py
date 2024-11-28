@@ -13,8 +13,8 @@ class Imovel(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    endereco = models.charField(max_length=255)
-    foto = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 480, 'height': 480, 'crop': True}})
+    endereco = models.CharField(max_length=255)
+    foto = StdImageField(('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 480, 'height': 480, 'crop': True}})
 
     def __str__(self):
         return self.nome

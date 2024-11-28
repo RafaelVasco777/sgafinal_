@@ -1,18 +1,17 @@
 from django.contrib import admin
-
-from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento, Corretor, Imobiliaria
+from .models import Imovel, Proprietario, Cliente, Contrato, Pagamento, Corretor
 
 @admin.register(Imovel)
 class ImovelAdmin(admin.ModelAdmin):
-    list_display = ('endereco', 'cidade', 'estado', 'tipo', 'preco')
+    list_display = ('nome', 'endereco', 'preco', 'descricao')
 
 @admin.register(Proprietario)
 class ProprietarioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cpf', 'telefone')
+    list_display = ('nome', 'telefone', 'email')
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cpf', 'email')
+    list_display = ('nome', 'telefone', 'email')
 
 @admin.register(Contrato)
 class ContratoAdmin(admin.ModelAdmin):
@@ -20,12 +19,8 @@ class ContratoAdmin(admin.ModelAdmin):
 
 @admin.register(Pagamento)
 class PagamentoAdmin(admin.ModelAdmin):
-    list_display = ('contrato', 'data_pagamento', 'valor', 'metodo_pagamento')
+    list_display = ('contrato', 'data_pagamento', 'valor')
 
 @admin.register(Corretor)
 class CorretorAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'creci', 'telefone')
-
-@admin.register(Imobiliaria)
-class ImobiliariaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'endereco', 'telefone')
+    list_display = ('nome', 'telefone', 'email')
