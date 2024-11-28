@@ -1,0 +1,7 @@
+<h2>Registrar um Novo Imóvel</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- Campos do formulário de imóvel aqui -->
+    <button type="submit">Registrar Imóvel</button>
+</form>
+<a href="{% url 'index' %}">Voltar para o Início</a>

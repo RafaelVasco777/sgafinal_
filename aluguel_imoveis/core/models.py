@@ -13,7 +13,7 @@ class Imovel(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    endereco = models.CharField(max_length=255)
+    endereco = models.CharField(max_length=255,default='Endereço não informado')
     foto = StdImageField(('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 480, 'height': 480, 'crop': True}})
 
     def __str__(self):
@@ -63,7 +63,7 @@ class Corretor(models.Model):
 
 class Imobiliaria(models.Model):
     nome = models.CharField(max_length=100)
-    endereco = models.CharField(max_length=255)
+    endereco = models.CharField(max_length=255, default='Endereço não informado')
     telefone = models.CharField(max_length=15)
 
     def __str__(self):
